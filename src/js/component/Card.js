@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { Context } from "../store/appContext";
+import { Link, useParams } from "react-router-dom";
 
 export const Card = props => {
+	const { store, actions } = useContext(Context);
+
 	return (
 		<div className="card-group col-4 m-4">
 			<div className="card ">
@@ -23,11 +27,18 @@ export const Card = props => {
 						</>
 					)}
 					<div className="d-flex justify-content-between">
-						<a href="#" className="btn btn-primary">
+						<Link to={"/detail/" + props.id} className="btn btn-primary">
 							Learn more!
-						</a>
-						<button type="button" className="btn btn-secondary">
-							<FontAwesomeIcon  icon={faHeart} />
+						</Link>
+						<button
+							type="button"
+							onClick={() => actions.addFavorito(props.id, props.name)}
+							className={`btn ${
+								store.favoritos.find(element => element.id == props.id)
+									? "btn-warning"
+									: "btn-secondary"
+							}`}>
+							<FontAwesomeIcon icon={faHeart} />
 						</button>
 					</div>
 				</div>
@@ -42,5 +53,6 @@ Card.propTypes = {
 	hair_color: PropTypes.string,
 	eye_color: PropTypes.string,
 	terrain: PropTypes.string,
-	population: PropTypes.string
+	population: PropTypes.string,
+	id: PropTypes.string
 };

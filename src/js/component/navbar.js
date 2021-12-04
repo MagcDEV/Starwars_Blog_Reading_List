@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import starWarsLogo from "../../img/star-wars-logo.png";
-import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
+
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid">
@@ -16,24 +20,22 @@ export const Navbar = () => {
 						id="dropdownMenuButton1"
 						data-bs-toggle="dropdown"
 						aria-expanded="false">
-						Favorites
+						Favorites {store.favoritos.length}
 					</button>
-					<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li>
-							<a className="dropdown-item" href="#">
-								Action
-							</a>
-						</li>
-						<li>
-							<a className="dropdown-item" href="#">
-								Another action
-							</a>
-						</li>
-						<li>
-							<a className="dropdown-item" href="#">
-								Something else here
-							</a>
-						</li>
+					<ul className="dropdown-menu" style={{ width: 190 + "px" }} aria-labelledby="dropdownMenuButton1">
+						{store.favoritos.map(element => {
+							return (
+								<li className="d-flex flex-row justify-content-between" key={element.id}>
+									<span>{element.item}</span>
+									<button type="button" onClick={() => actions.removeFavorito(element.id)} className="btn btn-light">
+										<FontAwesomeIcon icon={faTrash} />
+									</button>
+								</li>
+							);
+						})}
+								{store.favoritos.length ? "" :
+											<span className="p-5">(Empty)</span>
+								}
 					</ul>
 				</div>
 			</div>

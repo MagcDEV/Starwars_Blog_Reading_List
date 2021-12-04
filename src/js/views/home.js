@@ -13,7 +13,8 @@ export const Home = () => {
 				{store.personas.map(value => {
 					return (
 						<Card
-							key={value.properties.name}
+							key={value._id}
+							id={value._id}
 							name={value.properties.name}
 							gender={value.properties.gender}
 							hair_color={value.properties.hair_color}
@@ -27,7 +28,8 @@ export const Home = () => {
 				{store.planets.map(value => {
 					return (
 						<Card
-							key={value.properties.name}
+							key={value._id}
+							id={value._id}
 							name={value.properties.name}
 							population={value.properties.population}
 							terrain={value.properties.terrain}

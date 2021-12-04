@@ -2,12 +2,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			personas: [],
-			planets: []
+			planets: [],
+			favoritos: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+			addFavorito: (id, name) => {
+				const store = getStore();
+
+				if (!store.favoritos.find(element => element.id == id)) {
+					setStore({
+						favoritos: [...store.favoritos, { id: id, item: name }]
+					});
+				}
+			},
+			removeFavorito: id => {
+				const store = getStore();
+				let newFavoritos = store.favoritos.filter(item => item.id !== id);
+				setStore({
+					favoritos: [...newFavoritos]
+				});
 			},
 			loadSomeData: async () => {
 				const store = getStore();
