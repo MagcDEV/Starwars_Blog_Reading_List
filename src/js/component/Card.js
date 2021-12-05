@@ -54,5 +54,6 @@ Card.propTypes = {
 	eye_color: PropTypes.string,
 	terrain: PropTypes.string,
 	population: PropTypes.string,
-	id: PropTypes.string
+	id: PropTypes.string,
+	description: PropTypes.string
 };

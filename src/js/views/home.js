@@ -19,6 +19,7 @@ export const Home = () => {
 							gender={value.properties.gender}
 							hair_color={value.properties.hair_color}
 							eye_color={value.properties.eye_color}
+							description={value.description}
 						/>
 					);
 				})}
@@ -33,6 +34,7 @@ export const Home = () => {
 							name={value.properties.name}
 							population={value.properties.population}
 							terrain={value.properties.terrain}
+							description={value.description}
 						/>
 					);
 				})}

@@ -3,6 +3,7 @@ import starWarsLogo from "../../img/star-wars-logo.png";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
@@ -10,9 +11,9 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container-fluid">
-				<a className="navbar-brand" href="#">
+				<Link className="navbar-brand" to="/">
 					<img src={starWarsLogo} alt="" width="140" height="74" className="d-inline-block align-text-top" />
-				</a>
+				</Link>
 				<div className="dropdown">
 					<button
 						className="btn btn-primary dropdown-toggle"
@@ -27,15 +28,16 @@ export const Navbar = () => {
 							return (
 								<li className="d-flex flex-row justify-content-between" key={element.id}>
 									<span>{element.item}</span>
-									<button type="button" onClick={() => actions.removeFavorito(element.id)} className="btn btn-light">
+									<button
+										type="button"
+										onClick={() => actions.removeFavorito(element.id)}
+										className="btn btn-light">
 										<FontAwesomeIcon icon={faTrash} />
 									</button>
 								</li>
 							);
 						})}
-								{store.favoritos.length ? "" :
-											<span className="p-5">(Empty)</span>
-								}
+						{store.favoritos.length ? "" : <span className="p-5">(Empty)</span>}
 					</ul>
 				</div>
 			</div>
