@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			personas: [],
 			planets: [],
-			favoritos: []
+			favoritos: [],
+			searchResult: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -79,10 +80,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ planets: [...store.planets, planets] });
 					});
 				}
+			},
+			loadSearchData: async searchTerm => {
+				const store = getStore();
 
-				/*
+				let response = await fetch(`https://www.swapi.tech/api/people/?name=${searchTerm}`);
+				let itemSearched = await response.json();
+				itemSearched = itemSearched.result;
 
-				*/
+				setStore({ searchResult: [...itemSearched] });
 			},
 			changeColor: (index, color) => {
 				//get the store
